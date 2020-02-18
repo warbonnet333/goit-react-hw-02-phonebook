@@ -1,0 +1,19 @@
+* {
+  margin: 0;
+  padding: 0;
+  box-sizing: border-box;
+}
+
+.container {
+  margin: 30px;
+  height: 200px;
+}
+
+.title {
+  text-align: center;
+  height: 25%;
+}
+
+.contactList {
+  padding-left: 30px;
+}
