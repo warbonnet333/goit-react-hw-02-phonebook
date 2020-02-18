@@ -1,6 +1,8 @@
 import React from "react";
 import styles from './List.module.css'
 import Contact from "../Contact/Contact"
+import PropTypes from 'prop-types';
+
 
 
 const List = ({ items, toDeleteContact }) =>
@@ -16,5 +18,9 @@ const List = ({ items, toDeleteContact }) =>
       </ul>
     </div>
   )
+
+List.propTypes = {
+  items: PropTypes.array.isRequired,
+}
 
 export default List
