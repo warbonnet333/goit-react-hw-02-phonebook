@@ -11,7 +11,7 @@ const Contact = ({ name, number, onDelete }) => (
 
 Contact.propTypes = {
   name: PropTypes.string,
-  number: PropTypes.number.isRequired,
+  // number: PropTypes.number,
   onDelete: PropTypes.func.isRequired
 }
 

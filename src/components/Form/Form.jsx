@@ -31,9 +31,9 @@ export default class Form extends Component {
         <h2 className={styles.title}>Phonebook</h2>
         <form onSubmit={this.hendleSubmit} className={styles.form} >
           <label htmlFor="name">Name</label>
-          <input type="text" name="name" value={name} placeholder="Write contact name" onChange={this.hendleChange} />
+          <input type="text" name="name" value={name} placeholder="Write contact name" onChange={this.hendleChange} required />
           <label htmlFor="number">Number</label>
-          <input type="number" name="number" value={number} placeholder="Write contact number" onChange={this.hendleChange} />
+          <input type="number" name="number" value={number} placeholder="Write contact number" onChange={this.hendleChange} required />
           <button type="submit">Add contact</button>
         </form>
       </div>
