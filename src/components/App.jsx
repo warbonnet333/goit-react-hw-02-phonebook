@@ -32,26 +32,21 @@ export default class App extends Component {
 
     if (this.state.contacts.find(item => item.name.toLowerCase() === contact.name.toLowerCase())) {
       alert(`${contact.name} is already in contacts`)
-    } else {
-      const contactToAdd = {
-        ...contact,
-        id: uuidv4()
-      }
-
-      this.setState(state => ({
-        contacts: [...state.contacts, contactToAdd]
-      }))
+      return
+    }
+    const contactToAdd = {
+      ...contact,
+      id: uuidv4()
     }
 
+    this.setState(state => ({
+      contacts: [...state.contacts, contactToAdd]
+    }))
 
   }
 
   deleteContact = (id) => {
     this.setState(state => ({ contacts: state.contacts.filter(item => item.id !== id) }))
-  }
-
-  filterContacts = () => {
-
   }
 
   render() {

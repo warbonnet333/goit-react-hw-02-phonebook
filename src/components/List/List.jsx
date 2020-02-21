@@ -6,13 +6,13 @@ import PropTypes from 'prop-types';
 
 
 const List = ({ items, toDeleteContact }) =>
-  items.length > 0 &&
+  items.length &&
   (
     <div className={styles.container}>
       <ul className={styles.contactList}>
-        {items.map(item => (
-          <li key={item.id}>
-            <Contact name={item.name} number={item.number} onDelete={() => toDeleteContact(item.id)} />
+        {items.map(({ id, name, number }) => (
+          <li key={id}>
+            <Contact name={name} number={number} onDelete={() => toDeleteContact(id)} />
           </li>
         ))}
       </ul>
@@ -20,7 +20,12 @@ const List = ({ items, toDeleteContact }) =>
   )
 
 List.propTypes = {
-  items: PropTypes.array.isRequired,
+  items: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string
+  })
+  ).isRequired,
 }
 
 export default List
