@@ -15,22 +15,30 @@ const changeFinalList = (prevArray, filter) => {
 export default class App extends Component {
 
   state = {
-    contacts: [{ id: 'id-1', name: 'Rosie Simpson', number: '459-12-56' },
-    { id: 'id-2', name: 'Hermione Kline', number: '443-89-12' },
-    { id: 'id-3', name: 'Eden Clements', number: '645-17-79' },
-    { id: 'id-4', name: 'Annie Copeland', number: '227-91-26' },],
+    contacts: [],
     filter: ""
   }
 
-  changeFilter = e => {
-    this.setState({ filter: e.target.value })
+  componentDidMount() {
+    const persistedConracts = localStorage.getItem("contacts")
+    if (persistedConracts) {
+      this.setState({ contacts: JSON.parse(persistedConracts) })
+    }
   }
 
+  componentDidUpdate(prevProps, prevState) {
+    if (prevState.contacts !== this.state.contacts) {
+      localStorage.setItem("contacts", JSON.stringify(this.state.contacts))
+    }
+  }
 
+  changeFilter = ({ target }) => this.setState({ filter: target.value })
+
+  checkedName = (newContact) => this.state.contacts.find(({ name }) => name.toLowerCase() === newContact.name.toLowerCase())
 
   addContact = (contact) => {
 
-    if (this.state.contacts.find(item => item.name.toLowerCase() === contact.name.toLowerCase())) {
+    if (this.checkedName(contact)) {
       alert(`${contact.name} is already in contacts`)
       return
     }

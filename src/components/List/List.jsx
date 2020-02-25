@@ -6,7 +6,7 @@ import PropTypes from 'prop-types';
 
 
 const List = ({ items, toDeleteContact }) =>
-  items.length &&
+  !!items.length &&
   (
     <div className={styles.container}>
       <ul className={styles.contactList}>
