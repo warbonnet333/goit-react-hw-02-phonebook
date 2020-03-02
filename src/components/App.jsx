@@ -4,12 +4,10 @@ import Form from "./Form/Form"
 import Filter from "./Filter/Filter"
 import styles from "./App.module.css"
 
-
+import changeFinalList from './service/changeFilter/changeFilter'
 const uuidv4 = require('uuid/v4')
 
-const changeFinalList = (prevArray, filter) => {
-  return prevArray.filter(item => item.name.toLowerCase().includes(filter.toLowerCase()))
-}
+
 
 
 export default class App extends Component {
