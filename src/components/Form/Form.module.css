@@ -7,28 +7,47 @@
 .title {
   text-align: center;
   height: 25%;
+  padding: 13px;
+  color: #20639b;
 }
 
 .container {
-  margin: 30px;
-  border: 2px solid black;
+  margin: 0 auto;
   width: 300px;
-  height: 200px;
 }
 
 .form {
+  border-radius: 8px;
   display: flex;
-  height: 75%;
+  height: 156px;
   flex-flow: column;
   justify-content: space-around;
-  padding-left: 10px;
+  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
 }
 
 .form button {
-  width: 80px;
-  margin: 0 auto;
+  width: 90%;
+  height: 23px;
+  color: white;
+  background-color: #20639b;
+  margin: 8px auto;
+  border: none;
+  border-radius: 3px;
+  transition: all 200ms ease-in-out;
+}
+
+.form label {
+  margin: 10px 0 0 15px;
 }
 
 .form input {
-  width: 50%;
+  width: 90%;
+  height: 25px;
+  margin: 0 auto;
+  border: 1px solid lightslategray;
+  border-radius: 3px;
+}
+
+.form button:hover {
+  background-color: #173f5f;
 }

@@ -1,12 +1,14 @@
 import React from "react";
 import PropTypes from 'prop-types';
+import style from './Contact.module.css'
+import { TiDelete } from "react-icons/all"
 
 const Contact = ({ name, number, onDelete }) => (
-  <div>
+  <li className={style.list__item}>
     <p>{name}</p>
     <p>{number}</p>
-    <button type="button" onClick={onDelete}>Delete</button>
-  </div>
+    <button type="button" onClick={onDelete}><TiDelete className={style.icon}/></button>
+  </li>
 )
 
 Contact.propTypes = {

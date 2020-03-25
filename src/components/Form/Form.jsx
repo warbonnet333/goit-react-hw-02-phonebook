@@ -1,10 +1,17 @@
 import React, { Component } from "react";
 import styles from "./Form.module.css"
+import { CSSTransition } from "react-transition-group"
+import slideTransition from '../../transitions/slide.module.css'
 
 export default class Form extends Component {
   state = {
     name: "",
     number: "",
+    isShown: false
+  }
+
+  componentDidMount() {
+    this.setState({ isShown: true })
   }
 
   hendleChange = (e) => {
@@ -27,18 +34,21 @@ export default class Form extends Component {
   }
 
   render() {
-    const { name, number } = this.state
+    const { name, number, isShown } = this.state
     return (
       <div className={styles.container}>
-        <h2 className={styles.title}>Phonebook</h2>
+        <CSSTransition in={isShown} timeout={500} classNames={slideTransition}>
+          <h2 className={styles.title}>Phonebook</h2>
+        </CSSTransition>
         <form onSubmit={this.hendleSubmit} className={styles.form} >
           <label htmlFor="name">Name</label>
-          <input type="text" name="name" value={name} placeholder="Write contact name" onChange={this.hendleChange} required />
+          <input type="text" name="name" value={name} onChange={this.hendleChange} required />
           <label htmlFor="number">Number</label>
-          <input type="number" name="number" value={number} placeholder="Write contact number" onChange={this.hendleChange} required />
+          <input type="number" name="number" value={number} onChange={this.hendleChange} required />
           <button type="submit">Add contact</button>
         </form>
       </div>
+
     )
   }
 }

@@ -3,18 +3,23 @@ import List from "./List/List"
 import Form from "./Form/Form"
 import Filter from "./Filter/Filter"
 import styles from "./App.module.css"
+import Alert from "./Alert/Alert"
 
 import changeFinalList from './service/changeFilter/changeFilter'
+import { CSSTransition } from "react-transition-group";
+import popTransition from '../transitions/pop.module.css';
+import slideTransition from "../transitions/slide.module.css"
 const uuidv4 = require('uuid/v4')
 
 
 
 
 export default class App extends Component {
-
   state = {
     contacts: [],
-    filter: ""
+    filter: "",
+    isAlertOpen: false,
+    existedName: ""
   }
 
   componentDidMount() {
@@ -37,7 +42,7 @@ export default class App extends Component {
   addContact = (contact) => {
 
     if (this.checkedName(contact)) {
-      alert(`${contact.name} is already in contacts`)
+      this.setState({ isAlertOpen: true, existedName: contact.name })
       return
     }
     const contactToAdd = {
@@ -51,25 +56,33 @@ export default class App extends Component {
 
   }
 
+  closeAlert = () => {
+    this.setState({ isAlertOpen: false })
+  }
+
   deleteContact = (id) => {
     this.setState(state => ({ contacts: state.contacts.filter(item => item.id !== id) }))
   }
 
   render() {
-    const { contacts, filter } = this.state
+    const { contacts, filter, existedName, isAlertOpen } = this.state
     const finalList = changeFinalList(contacts, filter)
+    const isFilterShown = !!(contacts.length > 2 || filter)
 
     return (
       <div>
         <Form onAddContact={this.addContact} />
+        <CSSTransition in={isAlertOpen} timeout={5000} classNames={popTransition} unmountOnExit>
+          <Alert existedName={existedName} onCloseAlert={this.closeAlert} />
+        </CSSTransition>
         <div className={styles.container}>
-          <h2>Contacts</h2>
-          {(contacts.length > 2 || filter) && <Filter value={filter} changeFilter={this.changeFilter} />}
+          <CSSTransition in={isFilterShown} timeout={250} classNames={popTransition} unmountOnExit>
+            <Filter value={filter} changeFilter={this.changeFilter} />
+          </CSSTransition>
           <List items={finalList} toDeleteContact={this.deleteContact} />
         </div>
-      </div>
+      </div >
     )
   }
-
 }
 

@@ -1,0 +1,25 @@
+.list__item p:first-of-type {
+  text-align: left;
+  margin-left: 15px;
+}
+
+.list__item button {
+  height: 30px;
+  width: 30px;
+  margin: 0 auto;
+  border-radius: 50%;
+  border: none;
+  cursor: pointer;
+}
+
+.icon {
+  color: red;
+  width: 100%;
+  height: 100%;
+  background-color: white;
+  border-radius: 50%;
+}
+
+.list__item button:hover .icon {
+  color: darkred;
+}
