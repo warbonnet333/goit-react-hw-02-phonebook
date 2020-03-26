@@ -9,6 +9,9 @@
   display: grid;
   align-items: center;
   grid-template-rows: 1fr 1fr;
+  position: absolute;
+  right: 20px;
+  top: 20px;
 }
 
 .alert button {

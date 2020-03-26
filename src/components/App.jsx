@@ -2,16 +2,13 @@ import React, { Component } from "react";
 import List from "./List/List"
 import Form from "./Form/Form"
 import Filter from "./Filter/Filter"
-import styles from "./App.module.css"
 import Alert from "./Alert/Alert"
-
+import styles from "./App.module.css"
 import changeFinalList from './service/changeFilter/changeFilter'
 import { CSSTransition } from "react-transition-group";
 import popTransition from '../transitions/pop.module.css';
-import slideTransition from "../transitions/slide.module.css"
+import slideTopTransition from '../transitions/slideFromTop.module.css'
 const uuidv4 = require('uuid/v4')
-
-
 
 
 export default class App extends Component {
@@ -43,8 +40,10 @@ export default class App extends Component {
 
     if (this.checkedName(contact)) {
       this.setState({ isAlertOpen: true, existedName: contact.name })
+      setTimeout(this.closeAlert, 3000)
       return
     }
+
     const contactToAdd = {
       ...contact,
       id: uuidv4()
@@ -53,7 +52,6 @@ export default class App extends Component {
     this.setState(state => ({
       contacts: [...state.contacts, contactToAdd]
     }))
-
   }
 
   closeAlert = () => {
@@ -71,10 +69,10 @@ export default class App extends Component {
 
     return (
       <div>
-        <Form onAddContact={this.addContact} />
-        <CSSTransition in={isAlertOpen} timeout={5000} classNames={popTransition} unmountOnExit>
+        <CSSTransition in={isAlertOpen} timeout={250} classNames={slideTopTransition} unmountOnExit>
           <Alert existedName={existedName} onCloseAlert={this.closeAlert} />
         </CSSTransition>
+        <Form onAddContact={this.addContact} />
         <div className={styles.container}>
           <CSSTransition in={isFilterShown} timeout={250} classNames={popTransition} unmountOnExit>
             <Filter value={filter} changeFilter={this.changeFilter} />
