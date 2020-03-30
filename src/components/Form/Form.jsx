@@ -2,6 +2,7 @@ import React, { Component } from "react";
 import styles from "./Form.module.css"
 import { CSSTransition } from "react-transition-group"
 import slideTransition from '../../transitions/slide.module.css'
+import PropTypes from 'prop-types';
 
 export default class Form extends Component {
   state = {
@@ -51,4 +52,8 @@ export default class Form extends Component {
 
     )
   }
+}
+
+Form.propTypes = {
+  onAddContact: PropTypes.func.isRequired
 }
