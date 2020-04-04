@@ -4,21 +4,14 @@ import Form from "./Form/Form"
 import Filter from "./Filter/Filter"
 import Alert from "./Alert/Alert"
 import styles from "./App.module.css"
-import changeFinalList from './service/changeFilter/changeFilter'
+// import changeFinalList from './service/changeFilter'
 import { CSSTransition } from "react-transition-group";
 import popTransition from '../transitions/pop.module.css';
 import slideTopTransition from '../transitions/slideFromTop.module.css'
 import { connect } from "react-redux"
 
-const uuidv4 = require('uuid/v4')
 
 class App extends Component {
-  state = {
-    contacts: [],
-    filter: "",
-    isAlertOpen: false,
-    existedName: ""
-  }
 
   componentDidMount() {
     const persistedConracts = localStorage.getItem("contacts")
@@ -29,69 +22,42 @@ class App extends Component {
 
   componentDidUpdate(prevProps, prevState) {
     if (prevState.contacts !== this.state.contacts) {
-      localStorage.setItem("contacts", JSON.stringify(this.state.contacts))
+      localStorage.setItem("contacts", JSON.stringify(this.props.contacts))
     }
   }
 
   changeFilter = ({ target }) => this.setState({ filter: target.value })
 
-  checkedName = (newContact) =>
-    this.state.contacts.find(({ name }) => {
-      if (name.toLowerCase() === newContact.name.toLowerCase()) {
-        return newContact.name
-      }
-      return false
-    })
 
-  addContact = (contact) => {
-
-    if (this.checkedName(contact)) {
-      this.setState({ isAlertOpen: true, existedName: contact.name })
-      setTimeout(this.closeAlert, 3000)
-      return
-    }
-
-    const contactToAdd = {
-      ...contact,
-      id: uuidv4()
-    }
-
-    this.setState(state => ({
-      contacts: [...state.contacts, contactToAdd]
-    }))
-  }
-
-  closeAlert = () => {
-    this.setState({ isAlertOpen: false })
-  }
-
-  deleteContact = (id) => {
-    this.setState(state => ({ contacts: state.contacts.filter(item => item.id !== id) }))
-  }
 
   render() {
-    const { contacts, filter, existedName, isAlertOpen } = this.state
-    const finalList = changeFinalList(contacts, filter)
+    const { contacts, isShown, filter } = this.props
     const isFilterShown = !!(contacts.length > 2 || filter)
 
     return (
       <div>
-        <CSSTransition in={isAlertOpen} timeout={250} classNames={slideTopTransition} unmountOnExit>
-          <Alert existedName={existedName} onCloseAlert={this.closeAlert} />
+        <CSSTransition in={isShown} timeout={250} classNames={slideTopTransition} unmountOnExit>
+          <Alert />
         </CSSTransition>
-        <Form onAddContact={this.addContact} />
+        <Form />
         <div className={styles.container}>
           <CSSTransition in={isFilterShown} timeout={250} classNames={popTransition} unmountOnExit>
-            <Filter value={filter} changeFilter={this.changeFilter} />
+            <Filter changeFilter={this.changeFilter} />
           </CSSTransition>
-          <List items={finalList} toDeleteContact={this.deleteContact} />
+          <List />
         </div>
       </div >
     )
   }
 }
 
+const mSTP = state => ({
+  contacts: state.contacts,
+  isShown: state.alert.showAlert,
+  filter: state.filter
+})
 
-export default connect()(App)
+
+export default connect(mSTP)(App)
 
 

@@ -22,4 +22,9 @@
   color: white;
   background-color: #20639b;
   margin: 0 auto;
+  transition: background-color 150ms ease-in-out;
+}
+
+.alert button:hover {
+  background-color: #07355a;
 }

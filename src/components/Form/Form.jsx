@@ -2,9 +2,17 @@ import React, { Component } from "react";
 import styles from "./Form.module.css"
 import { CSSTransition } from "react-transition-group"
 import slideTransition from '../../transitions/slide.module.css'
-import PropTypes from "prop-types"
+import checkedName from "../service/checkedName"
+// import PropTypes from "prop-types"
 import { connect } from "react-redux"
 import * as listActions from "../redux/listActions"
+import * as alertActions from '../redux/alertActions'
+const uuidv4 = require("uuid/v4");
+
+const initialState = {
+  name: "",
+  number: "",
+}
 
 class Form extends Component {
   state = {
@@ -28,12 +36,22 @@ class Form extends Component {
     e.preventDefault()
 
     const { name, number } = this.state
-    this.props.addContact(name, number)
+    const { contacts, addContact } = this.props
+    if (!checkedName(contacts, name)) {
+      const contactToAdd = {
+        name,
+        number,
+        id: uuidv4()
+      }
+      console.log(contactToAdd)
+      addContact(contactToAdd)
+    } else {
+      this.props.switchAlert(name)
+      console.log("error")
+    }
 
-    this.setState({
-      name: "",
-      number: ""
-    })
+
+    this.setState(state => ({ ...state, ...initialState }))
   }
 
   render() {
@@ -56,31 +74,19 @@ class Form extends Component {
   }
 }
 
-const mDTP = dispatch => ({
-  addContact: (name, number) => dispatch(listActions.addContact(name, number))
+const mSTP = state => ({
+  contacts: state.contacts
 })
 
-export default connect(null, mDTP)(Form)
+const mDTP = dispatch => ({
+  addContact: (name, number) => dispatch(listActions.addContact(name, number)),
+  switchAlert: name => dispatch(alertActions.switchAlert(name))
+})
 
-Form.propTypes = {
-  onAddContact: PropTypes.func.isRequired
-}
+export default connect(mSTP, mDTP)(Form)
 
-// const Form = ({ name = 'hello', number = 0, hendleNameChange, hendleNumberChange, addContact }) =>
-//   <div className={styles.container}>
-//     <CSSTransition timeout={500} classNames={slideTransition}>
-//       <h2 className={styles.title}>Phonebook</h2>
-//     </CSSTransition>
-//     <form className={styles.form} onSubmit={(e => {
-//       e.preventDefault();
-//       addContact(name, number);
-//     })}>
-//       <label htmlFor="name">Name</label>
-//       <input type="text" name="name" value={name} onChange={hendleNameChange} required />
-//       <label htmlFor="number">Number</label>
-//       <input type="number" name="number" value={number} onChange={hendleNumberChange} required />
-//       <button type="submit">Add contact</button>
-//     </form>
-//   </div >
+
+
+
 
 

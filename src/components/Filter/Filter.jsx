@@ -15,11 +15,13 @@ Filter.propTypes = {
   changeFilter: PropTypes.func.isRequired
 }
 
-// const mSTP = (state) => ({
-//   value: state.filter
-// })
+const mSTP = state => ({
+  value: state.filter
+})
 
-// const mDTP = (dispatch) => ({ f })
+const mDTP = (dispatch) => ({
+  changeFilter: () => dispatch()
+})
 
 // export default connect(mSTP)(Filter)
 export default (Filter)

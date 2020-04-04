@@ -1,6 +1,8 @@
 import React from "react"
 import style from "./Alert.module.css"
 import PropTypes from 'prop-types';
+import { connect } from "react-redux"
+import * as alertActions from '../redux/alertActions'
 
 
 const Alert = ({ existedName, onCloseAlert }) =>
@@ -16,4 +18,13 @@ Alert.propTypes = {
   onCloseAlert: PropTypes.func.isRequired
 }
 
-export default Alert
+const mSTP = state => ({
+  existedName: state.alert.existedName
+})
+
+const mDTP = dispatch => ({
+  onCloseAlert: () => dispatch(alertActions.closeAlert())
+})
+
+
+export default connect(mSTP, mDTP)(Alert)
