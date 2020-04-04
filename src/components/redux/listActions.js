@@ -3,19 +3,23 @@ export const Type = {
   DELETE_CONTACT: "DELETE_CONTACT",
   OPEN_EXISET_ALERT: "OPEN_EXISET_ALERT",
   CLOSE_EXISET_ALERT: "CLOSE_EXISET_ALERT",
-  FILL_FILTER: "FILL_FILTER"
+  FILL_FILTER: "FILL_FILTER",
+  FETCH_FROM_LOCAL: "FETCH_FROM_LOCAL",
 };
 
-export const addContact = newContact => {
+export const addContact = (newContact) => {
   return {
     type: Type.ADD_CONTACT,
-    payload: newContact
+    payload: newContact,
   };
 };
 
-export const deleteContact = id => ({
+export const deleteContact = (id) => ({
   type: Type.DELETE_CONTACT,
-  payload: id
+  payload: id,
 });
 
-
+export const addFromLocalStorage = (array) => ({
+  type: Type.FETCH_FROM_LOCAL,
+  payload: array,
+});

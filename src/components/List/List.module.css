@@ -5,8 +5,9 @@
 }
 
 .list {
-  margin-top: 15px;
+  margin: 15px auto;
   list-style: none;
+  width: 300px;
 }
 
 .list li {

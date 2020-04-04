@@ -1,6 +1,8 @@
 import React from "react";
 import PropTypes from 'prop-types';
 import style from "./Filter.module.css"
+import * as filterActions from "../redux/filterActions"
+import { connect } from "react-redux"
 
 
 const Filter = ({ value, changeFilter }) => (
@@ -20,8 +22,7 @@ const mSTP = state => ({
 })
 
 const mDTP = (dispatch) => ({
-  changeFilter: () => dispatch()
+  changeFilter: (event) => dispatch(filterActions.fillFilter(event))
 })
 
-// export default connect(mSTP)(Filter)
-export default (Filter)
+export default connect(mSTP, mDTP)(Filter)

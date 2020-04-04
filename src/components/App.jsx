@@ -3,32 +3,28 @@ import List from "./List/List"
 import Form from "./Form/Form"
 import Filter from "./Filter/Filter"
 import Alert from "./Alert/Alert"
-import styles from "./App.module.css"
-// import changeFinalList from './service/changeFilter'
 import { CSSTransition } from "react-transition-group";
 import popTransition from '../transitions/pop.module.css';
 import slideTopTransition from '../transitions/slideFromTop.module.css'
 import { connect } from "react-redux"
+import * as listActions from "./redux/listActions"
+import PropTypes from 'prop-types';
 
 
 class App extends Component {
 
   componentDidMount() {
-    const persistedConracts = localStorage.getItem("contacts")
-    if (persistedConracts) {
-      this.setState({ contacts: JSON.parse(persistedConracts) })
+    const persistedContacts = localStorage.getItem("contacts")
+    if (persistedContacts) {
+      this.props.fetchFromLocal(JSON.parse(persistedContacts))
     }
   }
 
   componentDidUpdate(prevProps, prevState) {
-    if (prevState.contacts !== this.state.contacts) {
+    if (prevProps.contacts !== this.props.contacts) {
       localStorage.setItem("contacts", JSON.stringify(this.props.contacts))
     }
   }
-
-  changeFilter = ({ target }) => this.setState({ filter: target.value })
-
-
 
   render() {
     const { contacts, isShown, filter } = this.props
@@ -40,13 +36,11 @@ class App extends Component {
           <Alert />
         </CSSTransition>
         <Form />
-        <div className={styles.container}>
-          <CSSTransition in={isFilterShown} timeout={250} classNames={popTransition} unmountOnExit>
-            <Filter changeFilter={this.changeFilter} />
-          </CSSTransition>
-          <List />
-        </div>
-      </div >
+        <CSSTransition in={isFilterShown} timeout={250} classNames={popTransition} unmountOnExit>
+          <Filter />
+        </CSSTransition>
+        <List />
+      </div>
     )
   }
 }
@@ -57,7 +51,22 @@ const mSTP = state => ({
   filter: state.filter
 })
 
+const mDTP = dispatch => ({
+  fetchFromLocal: array => dispatch(listActions.addFromLocalStorage(array))
+})
 
-export default connect(mSTP)(App)
+App.propTypes = {
+  contacts: PropTypes.arrayOf(PropTypes.shape({
+    id: PropTypes.string.isRequired,
+    name: PropTypes.string.isRequired,
+    number: PropTypes.string,
+  })
+  ).isRequired,
+  isShown: PropTypes.bool.isRequired,
+  filter: PropTypes.string.isRequired
+}
+
+
+export default connect(mSTP, mDTP)(App)
 
 

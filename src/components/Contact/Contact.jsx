@@ -12,7 +12,9 @@ const Contact = ({ name, number, onDelete }) =>
 
 
 Contact.propTypes = {
-  onDelete: PropTypes.func.isRequired
+  onDelete: PropTypes.func.isRequired,
+  name: PropTypes.string.isRequired,
+  number: PropTypes.string
 }
 
 export default Contact
