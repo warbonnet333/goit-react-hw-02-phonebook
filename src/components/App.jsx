@@ -8,10 +8,11 @@ import changeFinalList from './service/changeFilter/changeFilter'
 import { CSSTransition } from "react-transition-group";
 import popTransition from '../transitions/pop.module.css';
 import slideTopTransition from '../transitions/slideFromTop.module.css'
+import { connect } from "react-redux"
+
 const uuidv4 = require('uuid/v4')
 
-
-export default class App extends Component {
+class App extends Component {
   state = {
     contacts: [],
     filter: "",
@@ -34,7 +35,13 @@ export default class App extends Component {
 
   changeFilter = ({ target }) => this.setState({ filter: target.value })
 
-  checkedName = (newContact) => this.state.contacts.find(({ name }) => name.toLowerCase() === newContact.name.toLowerCase())
+  checkedName = (newContact) =>
+    this.state.contacts.find(({ name }) => {
+      if (name.toLowerCase() === newContact.name.toLowerCase()) {
+        return newContact.name
+      }
+      return false
+    })
 
   addContact = (contact) => {
 
@@ -83,4 +90,8 @@ export default class App extends Component {
     )
   }
 }
+
+
+export default connect()(App)
+
 

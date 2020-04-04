@@ -15,4 +15,11 @@ Filter.propTypes = {
   changeFilter: PropTypes.func.isRequired
 }
 
-export default Filter
+// const mSTP = (state) => ({
+//   value: state.filter
+// })
+
+// const mDTP = (dispatch) => ({ f })
+
+// export default connect(mSTP)(Filter)
+export default (Filter)
