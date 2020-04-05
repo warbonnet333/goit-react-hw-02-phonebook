@@ -1,25 +1,13 @@
-import { Type } from "./listActions"
+import { createReducer } from "@reduxjs/toolkit";
+import { switchAlert, closeAlert } from "./alertActions";
 
-const toggleAlert = (state =
-    {
-        showAlert: false
-    },
-    { type, payload }) => {
-
-    switch (type) {
-        case Type.OPEN_EXISET_ALERT:
-            return {
-                showAlert: true,
-                existedName: payload
-            }
-        case Type.CLOSE_EXISET_ALERT:
-            return {
-                showAlert: false
-            }
-
-        default:
-            return state
-    }
-}
-
-export default toggleAlert
+export default createReducer(
+  { showAlert: false },
+  {
+    [switchAlert]: (state, action) => ({
+      showAlert: true,
+      existedName: action.payload,
+    }),
+    [closeAlert]: (state, action) => ({ showAlert: false }),
+  }
+);

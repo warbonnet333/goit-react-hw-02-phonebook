@@ -22,7 +22,7 @@ const mSTP = state => ({
 })
 
 const mDTP = (dispatch) => ({
-  changeFilter: (event) => dispatch(filterActions.fillFilter(event))
+  changeFilter: (event) => dispatch(filterActions.fillFilter(event.target.value))
 })
 
 export default connect(mSTP, mDTP)(Filter)

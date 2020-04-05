@@ -1,8 +1,3 @@
-import { Type } from "./listActions";
+import { createAction } from "@reduxjs/toolkit";
 
-export const fillFilter = (event) => {
-  return {
-    type: Type.FILL_FILTER,
-    payload: event.target.value,
-  };
-};
+export const fillFilter = createAction("filterReduser/fillFilter");

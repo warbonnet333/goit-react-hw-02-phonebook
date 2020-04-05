@@ -1,14 +1,4 @@
-import { Type } from "./listActions"
+import { createAction } from "@reduxjs/toolkit";
 
-export const switchAlert = name => {
-    return {
-        type: Type.OPEN_EXISET_ALERT,
-        payload: name
-    }
-}
-
-export const closeAlert = () => {
-    return {
-        type: Type.CLOSE_EXISET_ALERT,
-    }
-}
+export const switchAlert = createAction("alertReduser/switchAlert");
+export const closeAlert = createAction("alertReduser/closeAlert");

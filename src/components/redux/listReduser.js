@@ -1,19 +1,9 @@
-import { Type } from "./listActions";
+import { createReducer } from "@reduxjs/toolkit";
+import { addContact, deleteContact, addFromLocalStorage } from "./listActions";
 
-const listReduser = (state = [], { type, payload }) => {
-  switch (type) {
-    case Type.DELETE_CONTACT:
-      return state.filter((item) => item.id !== payload);
-
-    case Type.ADD_CONTACT:
-      return [...state, payload];
-
-    case Type.FETCH_FROM_LOCAL:
-      return [...state, ...payload];
-
-    default:
-      return state;
-  }
-};
-
-export default listReduser;
+export default createReducer([], {
+  [addContact]: (state, action) => [...state, action.payload],
+  [deleteContact]: (state, action) =>
+    state.filter((item) => item.id !== action.payload),
+  [addFromLocalStorage]: (state, action) => [...state, ...action.payload],
+});

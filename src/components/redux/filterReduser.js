@@ -1,13 +1,6 @@
-import { Type } from "./listActions";
+import { createReducer } from "@reduxjs/toolkit";
+import { fillFilter } from "./filterActions";
 
-const filterReduser = (state = "", { type, payload }) => {
-  switch (type) {
-    case Type.FILL_FILTER:
-      return payload;
-
-    default:
-      return state;
-  }
-};
-
-export default filterReduser;
+export default createReducer("", {
+  [fillFilter]: (state, action) => action.payload,
+});
