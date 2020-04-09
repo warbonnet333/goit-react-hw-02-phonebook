@@ -1,8 +1,8 @@
 import React, { Component } from "react";
-import List from "./List/List"
-import Form from "./Form/Form"
-import Filter from "./Filter/Filter"
-import Alert from "./Alert/AlertContainer"
+import Alert from "./Alert/AlerContainer"
+import Filter from "./Filter/FilterContainer"
+import Form from "./Form/FormContainer"
+import List from "./List/ListContainer"
 import { CSSTransition } from "react-transition-group";
 import popTransition from '../transitions/pop.module.css';
 import slideTopTransition from '../transitions/slideFromTop.module.css'
