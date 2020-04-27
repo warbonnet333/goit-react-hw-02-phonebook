@@ -1,0 +1,9 @@
+body {
+    background: linear-gradient(135deg, #A0EBCF, #014871);
+    background-repeat: no-repeat;
+}
+
+.container {
+    height: 100vh;
+    padding-bottom: 50px;
+}

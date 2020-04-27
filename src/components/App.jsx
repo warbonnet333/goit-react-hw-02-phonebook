@@ -9,6 +9,7 @@ import slideTopTransition from '../transitions/slideFromTop.module.css'
 import { connect } from "react-redux"
 import * as listActions from "./redux/listActions"
 import PropTypes from 'prop-types';
+import styles from "./App.module.css"
 
 
 class App extends Component {
@@ -31,7 +32,7 @@ class App extends Component {
     const isFilterShown = !!(contacts.length > 2 || filter)
 
     return (
-      <div>
+      <div className={styles.container}>
         <CSSTransition in={isShown} timeout={250} classNames={slideTopTransition} unmountOnExit>
           <Alert />
         </CSSTransition>

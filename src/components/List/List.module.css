@@ -1,21 +1,22 @@
 * {
-  margin: 0;
-  padding: 0;
-  box-sizing: border-box;
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
 }
 
 .list {
-  margin: 15px auto;
-  list-style: none;
-  width: 300px;
+    margin: 15px auto;
+    list-style: none;
+    width: 300px;
 }
 
 .list li {
-  height: 50px;
-  margin: 10px 0;
-  display: grid;
-  grid-template-columns: 3fr 3fr 1fr;
-  align-items: center;
-  border-radius: 3px;
-  box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    height: 50px;
+    margin: 10px 0;
+    display: grid;
+    grid-template-columns: 3fr 3fr 1fr;
+    align-items: center;
+    box-shadow: 0 2px 6px rgba(0, 0, 0, 0.3);
+    background-color: white;
+    border-radius: 5px;
 }

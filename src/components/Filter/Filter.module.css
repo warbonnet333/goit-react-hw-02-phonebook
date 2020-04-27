@@ -1,23 +1,24 @@
 .container {
-  margin: 15px auto 0;
-  width: 300px;
-  border-radius: 8px;
-  box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
-  display: flex;
-  flex-flow: column;
-  justify-content: space-evenly;
+    margin: 15px auto 0;
+    width: 300px;
+    border-radius: 8px;
+    box-shadow: 0px 2px 4px rgba(0, 0, 0, 0.3);
+    display: flex;
+    flex-flow: column;
+    justify-content: space-evenly;
+    background-color: whitesmoke;
 }
 
 .container input {
-  width: 90%;
-  height: 25px;
-  margin: 5px auto 10px;
-  border: 1px solid lightslategray;
-  border-radius: 3px;
+    width: 90%;
+    height: 25px;
+    margin: 5px auto 10px;
+    border: 1px solid lightslategray;
+    border-radius: 3px;
 }
 
 .container label {
-  text-align: left;
-  margin-left: 15px;
-  margin: 10px 0 0 15px;
+    text-align: left;
+    margin-left: 15px;
+    margin: 10px 0 0 15px;
 }
